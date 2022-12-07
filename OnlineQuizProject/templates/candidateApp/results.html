@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <h3>Results:</h3>
+    {% if results %}
+    <table border="1px">
+        <thead>
+            <th>Id</th>
+            <th>quiz</th>
+            <th>attempted questions</th>
+            <th>currect answera</th>
+            <th>incorrect answers</th>
+            <th>Total Mark</th>
+
+        </thead>
+        {% for result in results %}
+        <tr>
+            <td>{{result.id}}</td>
+            <td>{{result.quiz}}</td>
+            <td>{{result.num_attempted_questions}}</td>
+            <td>{{result.num_correct_questions}}</td>
+            <td>{{result.num_incorrect_questions}}</td>
+            <td>{{result.total_marks}}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    {%else%}
+    <p>There are no results found!</p>
+    {% endif %}
+</body>
+</html>

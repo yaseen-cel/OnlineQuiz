@@ -1,0 +1,19 @@
+<form  method="POST">
+  {% csrf_token %}
+  <table aglin=align="center" border="bold" cellspacing="6" cellpadding="6">
+  <tr>
+  <td>Username:<input type="text" name="username"></td>
+  </tr>
+   
+       <tr>
+  <td>enter password:<input type="password" name="password"></td>
+  </tr>
+  <tr>
+  <td><input type="submit"  value="login" ></td>
+  </tr>
+<div>
+    {% for message in messages %}
+    <h3>{{ message }}</h3>
+    {% endfor %}
+  
+  </div>

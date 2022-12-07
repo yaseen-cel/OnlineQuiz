@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz</title>
+</head>
+<body>
+    {% if message %}
+    <p>{{message}}</p>
+    <br><a href="/quiztoday">Go back</a>
+    {%else%}
+    <script>
+        var end_time = '{{endtime}}'
+        var quiz_end_time = '{{quiz_end_time}}'
+        // Set the date we're counting down to
+        var countDownDate = new Date(end_time).getTime();
+        var countDownQuizEndTime = new Date(quiz_end_time).getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+        
+          // Get today's date and time
+          var now = new Date().getTime();
+        
+          // Find the distance between now and the count down date
+          var distance1 = countDownDate - now;
+          var distance2 = countDownQuizEndTime - now;
+          if(distance2 > distance1){
+            var distance = distance1
+          }
+          else{
+            var distance = distance2
+          }
+          
+            
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+          // Output the result in an element with id="demo"
+          document.getElementById("demo").innerHTML = hours + "h "
+          + minutes + "m " + seconds + "s ";
+            
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("submitquiz").click();
+        }
+        }, 1000);
+        </script>
+    <h1>{{quiz.quiz_name}}</h1>
+    Quiz Id   : &nbsp {{quiz.id}} <br>
+    Quiz Name : &nbsp {{quiz.quiz_name}} <br>
+    Start Time : &nbsp {{quiz.start_time}} <br>
+    End Time : &nbsp {{quiz.end_time}} <br>
+    Duration : &nbsp {{quiz.duration}} <br>
+    Number of Questions : &nbsp {{quiz.num_of_questions}} <br>
+    Max Marks : &nbsp {{quiz.maximum_marks}} <br>
+    Mark per Question : &nbsp{{quiz.marks_per_question}} <br>
+    Negative Marks per Question : &nbsp {{quiz.question_negative_marks}} <br>
+         <br><br>
+
+
+<h1>Questions:</h1>
+<form action="" method="post">
+    <b><p id="demo"></p></b>
+
+    {%csrf_token%}
+    {% if quizQuestions %}
+    
+        {% for question in quizQuestions %}
+            <p><b>{{forloop.counter}}.{{question.question}}</b></p>
+            <input type="radio" id="A" name="{{question.id}}" value="A">
+            <label for="A">{{question.option1}}</label><br>
+            <input type="radio" id="B" name="{{question.id}}" value="B">
+            <label for="B">{{question.option2}}</label><br>
+            <input type="radio" id="C" name="{{question.id}}" value="C">
+            <label for="C">{{question.option3}}</label><br>
+            <input type="radio" id="D" name="{{question.id}}" value="D">
+            <label for="D">{{question.option4}}</label>
+
+        {% endfor %}
+        
+        <br><br><input type="submit" id="submitquiz" value="Submit">
+
+    {%else%}
+    <p>There are no questions found!</p>
+    {% endif %}
+</form>
+{%endif%}
+</body>
+</html>

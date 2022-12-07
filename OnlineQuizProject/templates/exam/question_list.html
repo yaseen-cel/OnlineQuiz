@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Question</title>
+</head>
+<body>
+    <h1>Questions:</h1>
+    {% if question_list %}
+    <table border="1px">
+        <thead>
+            <th>Id</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Option 3</th>
+            <th>OPtion 4</th>
+            <th>Correct Answer</th>
+            <th>Actions</th>
+        </thead>
+        {% for question in question_list %}
+        <tr>
+            <td>{{question.id}}</td>
+            <td>{{question.question}}</td>
+            <td>{{question.option1}}</td>
+            <td>{{question.option2}}</td>
+            <td>{{question.option3}}</td>
+            <td>{{question.option4}}</td>
+            <td>{{question.correct_answer}}</td>
+            <td><a href="/updatequestion/{{question.id}}">Update</a></td>
+            <td><a href="/deletequestion/{{question.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {%else%}
+    <p>There are no records found!</p>
+    {% endif %}
+    <a href="/question">Add Question</a>
+</body>
+</html>

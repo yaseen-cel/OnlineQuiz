@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Quiz</title>
+</head>
+<body>
+    <h1>Today's Quiz:</h1>
+    {% if today_quiz %}
+    <table border="1px">
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Duration</th>
+            <th>No. of questions</th>
+            <th>Maximum Mark</th>
+            <th>Mark Per Question</th>
+            <th>Question Negative Mark</th>
+            <th>Action</th>
+        </thead>
+        {% for quiz in today_quiz %}
+        <tr>
+            <td>{{quiz.id}}</td>
+            <td>{{quiz.quiz_name}}</td>
+            <td>{{quiz.quiz_date}}</td>
+            <td>{{quiz.start_time}}</td>
+            <td>{{quiz.end_time}}</td>
+            <td>{{quiz.duration}}</td>
+            <td>{{quiz.num_of_questions}}</td>
+            <td>{{quiz.maximum_marks}}</td>
+            <td>{{quiz.marks_per_question}}</td>
+            <td>{{quiz.question_negative_marks}}</td>
+            {% if quiz.id in quiz_ready_to_start %}
+            <td><a href="/quiz/{{quiz.id}}">Start Quiz</a></td>
+            {%endif%}
+
+        </tr>
+        {% endfor %}
+    </table>
+    {%else%}
+    <p>There are no quiz Today!</p>
+    {% endif %}
+</body>
+</html>

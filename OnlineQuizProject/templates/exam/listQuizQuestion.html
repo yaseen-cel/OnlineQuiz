@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Questions</title>
+</head>
+<body>
+    <h1>Add Questions:</h1>
+    <form action="" method="post">
+    {% csrf_token %}
+    Quiz Id   : &nbsp {{quiz.id}} <br>
+    Quiz Name : &nbsp {{quiz.quiz_name}} <br>
+    Quiz Date : &nbsp {{quiz.quiz_date}} <br><br><br>
+
+    <label for="question">Choose a Question:</label>
+    <select name="question" id="question">
+    {% for question in  questions %}
+    <option value="{{question.id}}">{{question.question}}</option>
+    
+    {%endfor%}
+    </select>
+    <input type="submit" value="Add">
+    {%for message in messages %}
+    <script>alert("{{message}}")</script>
+    {%endfor%}
+
+    
+</form>
+<h1>Questions:</h1>
+    {% if quizQuestions %}
+    <table border="1px">
+        <thead>
+            <th>Id</th>
+            <th>Question</th>
+            <th>Option 1</th>
+            <th>Option 2</th>
+            <th>Option 3</th>
+            <th>OPtion 4</th>
+            <th>Correct Answer</th>
+        </thead>
+        {% for question in quizQuestions %}
+        <tr>
+            <td>{{question.id}}</td>
+            <td>{{question.question}}</td>
+            <td>{{question.option1}}</td>
+            <td>{{question.option2}}</td>
+            <td>{{question.option3}}</td>
+            <td>{{question.option4}}</td>
+            <td>{{question.correct_answer}}</td>
+            <td><a href="/removequestions/{{quiz.id}}/{{question.id}}">Remove</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {%else%}
+    <p>There are no questions found!</p>
+    {% endif %}
+</body>
+</html>
