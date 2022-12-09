@@ -26,7 +26,9 @@ urlpatterns = [
     #path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path('register/',ac_views.register,name='register'),
     path('login/',ac_views.LoginView.as_view(),name='login'),
+    path('logout/',ac_views.logout),
     path('index/',ac_views.index,name='index'),
+    path('redirect/',ac_views.authRedirect,name='redirect'),
     #Quiz related Url's
     path('examiner/',exam_views.examinerHome,name='examinerHome'),
     path('addquiz/',exam_views.QuizCreateView.as_view(),name='createQuiz'),
@@ -47,4 +49,5 @@ urlpatterns = [
     path('quiz/<int:pk>/',ca_views.quiz,name='quiz'),
     path('candidatehome/',ca_views.candidateHome,name='candidatehome'),
     path('results/',ca_views.results,name='results'),
+    
 ]

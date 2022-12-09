@@ -101,3 +101,13 @@ def index(request):
         user = isAuthorized(request)
         print(user,'user')
         return render(request,"accounts/index.html")
+def logout(request):
+    if(request.session['Authorization']):
+        print('inside')
+        del request.session['Authorization']
+        print('in')
+    return redirect('login')
+ 
+def authRedirect(request):
+    print('abcd')
+    return render(request,"accounts/login.html")

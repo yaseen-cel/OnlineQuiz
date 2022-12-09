@@ -3,7 +3,8 @@ from .models import Quiz,Question,QuizQuestion
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from accounts.views import isAuthorized
+from accounts.authorization import isAuthorized
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 #Quiz Related Views
@@ -79,6 +80,7 @@ def ListQuizQuestion(request,**kwargs):
 
 def removeQuizQuestion(request,**kwargs):
     pass
+@login_required
 def examinerHome(request):
     user_email = isAuthorized(request)
 
